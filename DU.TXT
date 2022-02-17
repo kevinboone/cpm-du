@@ -1,0 +1,39 @@
+Disk usage utility for CP/M
+===========================
+
+"du" is a file storage reporter for CP/M, loosely modeled on the Unix utility
+of the same name. It reports the number of files, the number of disk blocks,
+and the total size, of files that match a pattern. 
+
+Usage
+-----
+
+    A> du {/dhv} {file patterns...}
+
+Run "du /h" for details of the command-line switches. Switches can be given
+together or as separate arguments; the switch character is either "/" or "-".
+
+Examples
+--------
+
+    A> du 
+
+Show totals for all files on the current drive.
+
+    A> du b:
+
+Show totals for all files on drive B.
+
+    A> du d:*.asm
+
+Show totals for all files that match the pattern. 
+
+Giving the `/d` (details) switch will make `du` report the sizes of
+individual files, rather than just a total.
+
+Author
+------
+scalc is maintained by Kevin Boone, and is distributed under the terms of the
+GNU public licence, v3.0.
+
+
