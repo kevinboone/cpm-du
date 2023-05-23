@@ -1,6 +1,6 @@
 # cpm-du
 
-Version 0.1a, February 2022, Kevin Boone
+Version 0.1b, May 2023, Kevin Boone
 
 ## What is this?
 
@@ -81,5 +81,13 @@ count.
 This code is distributed under the terms of the GNU Public Licence, v3.0, 
 in the hope that maybe somebody will find it useful. All the code
 is original. There is no warranty of any kind.
+
+## Revisions
+
+May 23 2023: fixed a bug where some file open operations seemed to fail, 
+because the return value from `F_OPEN` was 1-3, not 0. Fixed a bug
+where the filenames were garbled because the MSB in the name was
+set to indicate an attribute.
+
 
 

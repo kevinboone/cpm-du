@@ -12,5 +12,7 @@
 	external putch
 	; external putdigit 
 	external puts 
+	external puts7bit
 	external space 
+	; external puth8
 

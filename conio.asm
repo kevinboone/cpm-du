@@ -8,7 +8,7 @@
 
 	include bdos.inc
 
-	global putch, puts, space, newline, exit
+	global putch, puts, space, newline, exit, puts7bit
 	; global putdigit, puth8, puth16, putnum
 
 ;------------------------------------------------------------------------
@@ -81,6 +81,39 @@ puts_done:
        RET
 
 ;------------------------------------------------------------------------
+;  puts7bit
+;  Output a zero-terminated string whose address is in HL; all 
+;  registers preserved. Like puts, but the top bit is zeroed. This is
+;  useful when dumping the filename from an FCB, where the top bits
+;  have meaning.
+;------------------------------------------------------------------------
+puts7bit:
+       PUSH   HL
+       PUSH   AF
+       PUSH   BC 
+       PUSH   DE 
+puts7_next:
+       LD     A,(HL) 
+       OR     0 
+       JR     Z, puts7_done
+       AND    7Fh
+
+       LD     C, 2
+       LD     E, A 
+       PUSH   HL
+       CALL   BDOS 
+       POP    HL
+
+       INC    HL
+       JR     puts7_next
+puts7_done:
+       POP    DE 
+       POP    BC 
+       POP    AF
+       POP    HL
+       RET
+
+;------------------------------------------------------------------------
 ;  space 
 ;  Output a space; all registers preserved
 ;------------------------------------------------------------------------
@@ -131,7 +164,6 @@ puth8:
 	CALL	putdigit
 	POP 	AF
 	RET
-
 
 ;------------------------------------------------------------------------
 ;  puth16

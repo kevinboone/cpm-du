@@ -253,9 +253,11 @@ doarg:
 	CALL	BDOS
 	POP	HL
 	POP	DE
-	CP	0
-	; I _think_ anything but zero is a failure here
-	JR	NZ, .openfail
+;CALL puth8
+;call newline
+	CP	4
+	; I _think_ any return value 3 or less is OK here 
+	JR	NC, .openfail
 
 	; Get the file size from BDOS
 	LD	C, F_SIZE
@@ -281,7 +283,7 @@ doarg:
 	LD	A, (details)
 	CP	0
 	JR	Z, .noprtname
-	CALL	puts
+	CALL	puts7bit
 	CALL	space
 .noprtname:
 
@@ -492,7 +494,7 @@ us_msg:
         db 13, 10, 0
 
 ver_msg:
-	db "Version 0.1a, (c)2022 K Boone, GPLv3"
+	db "Version 0.1b, (c)2023 K Boone, GPLv3"
         db 13, 10, 0
 
 bs_msg:
